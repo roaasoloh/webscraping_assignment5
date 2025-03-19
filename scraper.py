@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # Setup Selenium WebDriver
 options = Options()
-# options.add_argument("--headless")  # Run in headless mode
+options.add_argument("--headless")  # Run in headless mode
 options.add_argument("--disable-gpu")
 options.add_argument("--window-size=1920,1080")
 
