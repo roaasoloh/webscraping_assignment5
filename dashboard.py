@@ -11,7 +11,6 @@ st.set_page_config(page_title="eBay Deals Dashboard", layout="wide")
 # Load the dataset
 @st.cache_data #Streamlit caching decorator used to optimize performance by preventing repeated reloading or recomputation of data
 def load_data():
-    df = pd.read_csv("../cleaned_ebay_deals.csv")
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df['hour'] = df['timestamp'].dt.hour
     return df
