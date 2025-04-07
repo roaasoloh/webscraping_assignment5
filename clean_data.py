@@ -42,13 +42,12 @@ df["price"] = pd.to_numeric(df["price"], errors="coerce")
 df["original_price"] = pd.to_numeric(df["original_price"], errors="coerce")
 
 # --- Step 5: Calculate Discount Percentage ---
-# Compute discount percentage as: (1 - price/original_price)*100
-# Round to 2 decimal places and fill any NaN values with 0%
 df["discount_percentage"] = ((1 - (df["price"] / df["original_price"])) * 100).round(2)
 df["discount_percentage"] = df["discount_percentage"].fillna(0)
 
-# --- Step 6: Save the Cleaned Data ---
-# The cleaned data is saved in a new CSV file for future analysis.
-df.to_csv("cleaned_ebay_deals.csv", index=False)
+# --- Step 6: Drop rows with missing price/original_price ---
+df = df.dropna(subset=["price", "original_price"])
 
-print("✅ Data cleaning complete. Cleaned data saved as 'cleaned_ebay_deals.csv'.")
+# --- Step 7: Save the Cleaned Data ---
+df.to_csv("cleaned_ebay_deals.csv", index=False)
+print("Data cleaning complete. Cleaned data saved as 'cleaned_ebay_deals.csv'.")
